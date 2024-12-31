@@ -32,7 +32,6 @@ import FolderTree from '../components/folderTree';
 import FileTable from '../components/fileTable';
 import Grid from '@mui/material/Grid2';
 import Folder from '../components/folder';
-import FolderTreeView from '../components/folderTreeView';
 
 
 const Dashboard = () => {
@@ -62,7 +61,6 @@ const Dashboard = () => {
     <Grid container spacing={2}>
       <Grid item xs={3}>
         <FolderTree folders={folderData} onFolderSelect={handleFolderSelect} />
-        {/* <FolderTreeView/> */}
       </Grid>
       <Grid item xs={9}>
         {/* <FileTable files={selectedFolderFiles} /> */}

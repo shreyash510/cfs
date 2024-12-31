@@ -1,49 +1,46 @@
 import React from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import { TreeView, TreeItem } from "@mui/lab";
-
-const ItemType = 'FOLDER'; // Define the type of items being dragged
+import { Breadcrumbs, Typography, Link } from '@mui/material';
+import { NavigateNext } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const FolderTree = () => {
-  // Sample data (use actual folder structure in your app)
-  const folders = [
-    { id: '1', name: 'Study XYZ-123' },
-    { id: '2', name: 'Study ABC-456' },
-    { id: '3', name: 'Study DEF-789' },
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    console.log(`Navigating to: ${path}`);
+    navigate(path);
+  };
+
+  const folderTree = [
+    { id: '1', name: 'My Drive', path: '/' },
+    { id: '2', name: 'extra data', path: '/extra-data' },
+    { id: '3', name: 'test', path: '/test' },
   ];
 
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemType, // This identifies the type of item being dragged
-    item: { id: '1', name: 'Study XYZ-123' },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
-
-  const [, drop] = useDrop(() => ({
-    accept: ItemType, // This is the type of item it accepts
-    drop: (item) => {
-      console.log(`Dropped folder: ${item.name} into folder: Study XYZ-123`);
-      // Add your logic here to handle folder movement
-    },
-  }));
-
   return (
-    <div ref={drop} style={{ width: '250px', padding: '10px', border: '1px solid #ddd' }}>
-      <TreeView>
-        {folders.map((folder) => (
-          <TreeItem
-            nodeId={folder.id}
-            label={folder.name}
-            key={folder.id}
-            ref={drag} // Make the tree items draggable
-            style={{
-              background: isDragging ? '#d3e5ff' : 'transparent', // Highlight when dragging
-            }}
-          />
-        ))}
-      </TreeView>
-    </div>
+    <Breadcrumbs
+      separator={<NavigateNext fontSize="small" />}
+      aria-label="breadcrumb"
+      sx={{ padding: '8px', backgroundColor: '#f9fafc', borderRadius: '4px' }}
+    >
+      {folderTree.map((folder, index) => (
+        <div key={folder.id}>
+          {index !== folderTree.length - 1 ? (
+            <Link
+              component="button"
+              variant="body2"
+              onClick={() => handleNavigate(folder.path)}
+              underline="hover"
+              sx={{ cursor: 'pointer' }}
+            >
+              {folder.name}
+            </Link>
+          ) : (
+            <Typography color="text.primary">{folder.name}</Typography>
+          )}
+        </div>
+      ))}
+    </Breadcrumbs>
   );
 };
 
