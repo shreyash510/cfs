@@ -1,12 +1,21 @@
+import React from 'react';
+import { List } from '@mui/material';
+import FileItem from './fileItem';
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
-const FileTable = () => {
-  const files = [
-    { name: "cdiscpilot01_clean copy 20.pdf", size: "4.0MB", owner: "Faris Awad", created: "Mon Oct 28 2024", modified: "Tue Nov 19 2024" },
-    { name: "cdiscpilot01_clean copy 24.pdf", size: "4.0MB", owner: "Faris Awad", created: "Mon Oct 28 2024", modified: "Mon Oct 28 2024" },
-  ];
 
+const FileTable = ({ folderId, files, onMoveFile }) => {
   return (
+    // <List>
+    //   {files?.map((file, index) => (
+    //     <FileItem
+    //       key={index}
+    //       file={file}
+    //       folderId={folderId}
+    //       onMoveFile={onMoveFile}
+    //     />
+    //   ))}
+    // </List>
     <Table>
       <TableHead>
         <TableRow>
