@@ -1,28 +1,34 @@
 // Example structure for file/folder hierarchy
-const folderData = [
-  {
-    id: '1',
-    name: 'Study XYZ-123',
-    children: [
-      {
-        id: '2',
-        name: 'Module 2.7',
-        children: [
-          { id: '3', name: 'CSR', files: [{ id: 'f1', name: 'file1.pdf', version: 1 }] },
-        ],
-      },
-      {
-        id: '4',
-        name: 'Module 5.3',
-        files: [{ id: 'f2', name: 'file2.pdf', version: 1 }],
-      },
-    ],
-  },
-  {
-    id: '5',
-    name: 'Study ABC-456',
-    files: [{ id: 'f3', name: 'file3.pdf', version: 1 }],
-  },
+// const folderData = [
+//   {
+//     id: '1',
+//     name: 'Study XYZ-123',
+//     children: [
+//       {
+//         id: '2',
+//         name: 'Module 2.7',
+//         children: [
+//           { id: '3', name: 'CSR', files: [{ id: 'f1', name: 'file1.pdf', version: 1 }] },
+//         ],
+//       },
+//       {
+//         id: '4',
+//         name: 'Module 5.3',
+//         files: [{ id: 'f2', name: 'file2.pdf', version: 1 }],
+//       },
+//     ],
+//   },
+//   {
+//     id: '5',
+//     name: 'Study ABC-456',
+//     files: [{ id: 'f3', name: 'file3.pdf', version: 1 }],
+//   },
+// ];
+
+const folderTree = [
+  { id: '1', name: 'My Drive', path: '/' },
+  { id: '2', name: 'extra data', path: '/extra-data' },
+  { id: '3', name: 'test', path: '/test' },
 ];
 
 // Dashboard component
@@ -32,6 +38,10 @@ import FolderTree from '../components/folderTree';
 import FileTable from '../components/fileTable';
 import Grid from '@mui/material/Grid2';
 import Folder from '../components/folder';
+import FolderTreeView from '../components/folderTreeView';
+import { Outlet } from 'react-router-dom';
+import { Box } from '@mui/material';
+
 
 
 const Dashboard = () => {
@@ -58,15 +68,16 @@ const Dashboard = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={3}>
-        <FolderTree folders={folderData} onFolderSelect={handleFolderSelect} />
-      </Grid>
-      <Grid item xs={9}>
-        {/* <FileTable files={selectedFolderFiles} /> */}
-        <Folder/>
-      </Grid>
-    </Grid>
+    <div container spacing={2} style={{display:'flex'}}>
+      <div>
+        <div>
+          <FolderTreeView />
+        </div>
+      </div>
+      <div>
+        <FolderTree onFolderSelect={handleFolderSelect} />
+        <Folder /></div>
+    </div>
   );
 };
 

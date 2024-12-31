@@ -6,13 +6,13 @@ import FolderTreeView from "./folderTreeView";
 import Folder from "./folder";
 
 const Layout = () => (
-  <Box display="flex" >
-    <div style={{ background: 'gray' }}>
+  <Box display="flex" justifyContent={'center'} marginTop={10}>
+    <div>
       {/* <Sidebar /> */}
-      <FolderTreeView/>
+      <FolderTreeView />
       {/* <Folder/> */}
     </div>
-    <div style={{ background: 'yellow'}}>
+    <div>
       <Box component="main" flex="1" p={2}>
         <Outlet />
       </Box>
