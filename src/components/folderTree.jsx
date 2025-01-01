@@ -21,14 +21,14 @@ const findPathById = (node, targetId, path = []) => {
 const FolderTree = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { folderData, selectedId } = useSelector((state) => state.folder);
+  const { folderStructure, selectedId } = useSelector((state) => state.folder);
 
   const handleNavigate = (path, id) => {
     dispatch(setSelectedId(id));
     navigate(path);
   };
 
-  const breadcrumbPath = findPathById(folderData, selectedId) || [folderData];
+  const breadcrumbPath = findPathById(folderStructure, selectedId) || [folderStructure];
 
   return (
     <Breadcrumbs

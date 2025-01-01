@@ -1,49 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Treebeard } from "react-treebeard";
+import { setSelectedId, toggleFolderNode } from "../redux/slice/folderSlice";
 
 const FolderTreeView = () => {
-  const [data, setData] = useState({
-    name: "Root",
-    toggled: true,
-    children: [
-      {
-        name: "Study XYZ-123",
-        children: [
-          {
-            name: "Module 2.7",
-            children: [
-              { name: "CSR", children: [] },
-            ],
-          },
-          { name: "Module 5.3", children: [] },
-        ],
-      },
-      {
-        name: "Study ABC-456",
-        children: [],
-      },
-    ],
-  });
+  const { folderTree, selectedId } = useSelector((state) => state.folder);
+  const dispatch = useDispatch();
 
-  const [cursor, setCursor] = useState(null);
+  const toggleNode = (node, toggled) => {
+    const updateNode = (currentNode) => {
+      return {
+        ...currentNode,
+        active: currentNode.name === node.name,
+        toggled: currentNode.name === node.name ? toggled : currentNode.toggled,
+        children: currentNode.children?.map(updateNode) || [],
+      };
+    };
 
-  const onToggle = (node, toggled) => {
-    if (cursor) {
-      cursor.active = false; // Deselect previous node
-    }
-    node.active = true; // Select the current node
-    if (node.children) {
-      node.toggled = toggled; // Expand/Collapse if it has children
-    }
-    setCursor(node);
-    setData({ ...data });
+    const updatedTree = updateNode(folderTree);
+    dispatch(setSelectedId(node.name)); // Update selected node
+    dispatch(toggleFolderNode(updatedTree)); // Update tree with the new toggled state
   };
 
   return (
     <div style={{ width: "250px" }}>
       <Treebeard
-        data={data}
-        onToggle={onToggle}
+        data={folderTree}
+        onToggle={toggleNode}
         style={{
           tree: {
             base: {
