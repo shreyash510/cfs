@@ -9,7 +9,7 @@ const filesData = [
 ];
 
 
-const Folder = ({ folderId, folderName }) => {
+const TableView = ({ folderId, folderName }) => {
   const [files, setFiles] = useState([...filesData]);
 
   return (
@@ -21,4 +21,4 @@ const Folder = ({ folderId, folderName }) => {
   );
 };
 
-export default Folder;
+export default TableView;
