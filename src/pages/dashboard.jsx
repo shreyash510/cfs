@@ -16,7 +16,8 @@ const Dashboard = () => {
       </div>
       <div>
         <FolderTree />
-        <TableView /></div>
+        <TableView />
+      </div>
     </div>
   );
 };
