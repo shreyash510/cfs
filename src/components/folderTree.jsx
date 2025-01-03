@@ -5,18 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedId } from '../redux/slice/folderSlice';
 import { useNavigate } from 'react-router-dom';
 
-// Recursive function to find the breadcrumb path
-const findPathById = (node, targetId, path = []) => {
-  if (node.id === targetId) return [...path, node];
-  if (!node.children) return null;
-
-  for (const child of node.children) {
-    const result = findPathById(child, targetId, [...path, node]);
-    if (result) return result;
-  }
-
-  return null;
-};
 
 const FolderTree = () => {
   const dispatch = useDispatch();
@@ -28,7 +16,12 @@ const FolderTree = () => {
     navigate(path);
   };
 
-  const breadcrumbPath = findPathById(folderStructure, selectedId) || [folderStructure];
+  // const breadcrumbPath = findPathById(folderStructure, selectedId) || [folderStructure];
+  const folderTree = [
+    { id: '1', name: 'My Drive', path: '/' },
+    { id: '2', name: 'extra data', path: '/extra-data' },
+    { id: '3', name: 'test', path: '/test' },
+  ];
 
   return (
     <Breadcrumbs
@@ -36,9 +29,9 @@ const FolderTree = () => {
       aria-label="breadcrumb"
       sx={{ padding: '8px', backgroundColor: '#f9fafc', borderRadius: '4px' }}
     >
-      {breadcrumbPath.map((folder, index) => (
+      {folderTree?.map((folder, index) => (
         <div key={folder.id}>
-          {index !== breadcrumbPath.length - 1 ? (
+          {index !== folderTree.length - 1 ? (
             <Link
               component="button"
               variant="body2"

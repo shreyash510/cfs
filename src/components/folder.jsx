@@ -11,30 +11,12 @@ const filesData = [
 
 const Folder = ({ folderId, folderName }) => {
   const [files, setFiles] = useState([...filesData]);
-  
-  // const onFileUpload = (file, targetFolderId) => {
-  //   const fileExists = files.find((f) => f.name === file.name);
-  //   if (fileExists) {
-  //     // Handle versioning logic here
-  //     setFiles((prevFiles) =>
-  //       prevFiles.map((f) => (f.name === file.name ? { ...f, version: f.version + 1 } : f))
-  //     );
-  //   } else {
-  //     setFiles([...files, { ...file, version: 1 }]);
-  //   }
-  // };
-
-
-  const onMoveFile = (file, targetFolderId) => {
-    console.log(`Moving file: ${file.name} to folder: ${folderName}`);
-    // Add logic for moving files between folders (update folder structure)
-  };
 
   return (
     <div>
       <h3>{folderName}</h3>
       {/* <FileUpload folderId={folderId} onFileUpload={onFileUpload} /> */}
-      <FileTable folderId={folderId} files={files} onMoveFile={onMoveFile} />
+      <FileTable folderId={folderId} files={files} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Treebeard } from "react-treebeard";
 import { setSelectedId, toggleFolderNode } from "../redux/slice/folderSlice";
 
-const FolderTreeView = () => {
+const FolderStructure = () => {
   const { folderTree, selectedId } = useSelector((state) => state.folder);
   const dispatch = useDispatch();
 
@@ -47,4 +47,4 @@ const FolderTreeView = () => {
   );
 };
 
-export default FolderTreeView;
+export default FolderStructure;

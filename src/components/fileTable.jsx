@@ -4,18 +4,8 @@ import FileItem from './fileItem';
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
 
-const FileTable = ({ folderId, files, onMoveFile }) => {
+const FileTable = ({ files}) => {
   return (
-    // <List>
-    //   {files?.map((file, index) => (
-    //     <FileItem
-    //       key={index}
-    //       file={file}
-    //       folderId={folderId}
-    //       onMoveFile={onMoveFile}
-    //     />
-    //   ))}
-    // </List>
     <Table>
       <TableHead>
         <TableRow>
